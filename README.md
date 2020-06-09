@@ -5,11 +5,10 @@ The original ARM template can be found at https://github.com/Azure/vdc/tree/mast
 
 You will need a subnet created of atleast a /28 and then have it delegated to the Microsoft.Sql/managedInstances resource provider or the deployment will fail. 
 
-Resources Deployed
+Creates a Managed Instance with
 
-Manged Instance
-User Defined Route
-Network security group
+*User Defined Route,
+*Network security group
 
 A object called managed_instance_object has been created for the resource variables,these can be set in the tfvars file  
 
