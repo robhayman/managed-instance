@@ -13,6 +13,8 @@ Network security group
 
 A object called managed_instance_object has been created for the resource variables,these can be set in the tfvars file  
 
+
+```hcl
 managed_instance_object                = {
        name                            = "testmanagedinstance"   #will need to be unique      
        sku_name                        = "GP_Gen5"
@@ -36,3 +38,4 @@ managed_instance_object                = {
       nsg_name_mi = "nsg_mi"
       mi_subnet_prefix = "10.1.5.0/24" #example prefix this needs to be set for the route tables and NSG's 
       subnet_id = "this can be hardcoded in this file or a data lookup can be setup"
+```
