@@ -1,5 +1,5 @@
 # managed-instance
-<<<<<<< HEAD
+
 This module will deploy a managed instance into an existing Vnet
 
 Prerequisites,
@@ -43,4 +43,4 @@ managed_instance_object                = {
       mi_subnet_prefix = "10.1.5.0/24" #example prefix this needs to be set for the route tables and NSG's 
       subnet_id = "this can be hardcoded in this file or a data lookup can be setup"
 ```
->>>>>>> 0c7ccf01b7e6886602869904c890495d88c4b82b
+
