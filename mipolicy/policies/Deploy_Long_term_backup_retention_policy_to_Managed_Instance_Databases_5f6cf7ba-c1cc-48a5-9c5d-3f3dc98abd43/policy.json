@@ -1,0 +1,112 @@
+{
+ "properties": {
+  "displayName": "Deploy Long term backup retention policy to Managed Instance Databases",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "MI DB LTR policy",
+  "metadata": {
+   "version": "0.0.1",
+   "category": "SQL",
+   "preview": true,
+   "createdBy": "af6fee07-7ea4-4075-aa4f-fad7267bad18",
+   "createdOn": "2021-07-30T11:25:36.646484Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Sql/managedInstances/databases"
+     },
+     {
+      "field": "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies/weeklyRetention",
+      "Equals": "PT0S"
+     },
+     {
+      "field": "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies/monthlyRetention",
+      "Equals": "PT0S"
+     },
+     {
+      "field": "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies/yearlyRetention",
+      "Equals": "PT0S"
+     },
+     {
+      "field": "name",
+      "notEquals": "master"
+     }
+    ]
+   },
+   "then": {
+    "effect": "DeployIfNotExists",
+    "details": {
+     "type": "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies",
+     "name": "current",
+     "evaluationDelay": "AfterProvisioning",
+     "roleDefinitionIds": [
+      "/providers/microsoft.authorization/roleDefinitions/9b7fa17d-e63e-47b0-bb0a-15c516ac86ec"
+     ],
+     "deployment": {
+      "properties": {
+       "mode": "incremental",
+       "template": {
+        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+         "fullDbName": {
+          "type": "string"
+         },
+         "monthlyRetention": {
+          "type": "string"
+         },
+         "weeklyRetention": {
+          "type": "string"
+         },
+         "weekOfYear": {
+          "type": "Integer"
+         },
+         "yearlyRetention": "string"
+        }
+       },
+       "resources": [
+        {
+         "name": "[concat(parameters('fullDbName'), '/current')]",
+         "type": "Microsoft.Sql/managedInstances/databases/backupLongTermRetentionPolicies",
+         "apiVersion": "2021-02-01-preview",
+         "properties": {
+          "monthlyRetention": "string",
+          "weeklyRetention": "string",
+          "weekOfYear": "Integer",
+          "yearlyRetention": "string"
+         }
+        }
+       ]
+      },
+      "parameters": {
+       "fullDbName": {
+        "value": "[field('fullName')]"
+       },
+       "monthlyRetention": {
+        "value": "[parameters('monthlyRetention')]"
+       },
+       "weeklyRetention": {
+        "value": "[parameters('weeklyRetention')]"
+       },
+       "weekOfYear": {
+        "value": "[parameters('weekOfYear')]"
+       },
+       "yearlyRetention": {
+        "value": "[parameters('yearlyRetention')]"
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "id": "/subscriptions/fa357408-7eec-4476-84e9-ace688dc1f6c/providers/Microsoft.Authorization/policyDefinitions/5f6cf7ba-c1cc-48a5-9c5d-3f3dc98abd43",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "5f6cf7ba-c1cc-48a5-9c5d-3f3dc98abd43"
+}
